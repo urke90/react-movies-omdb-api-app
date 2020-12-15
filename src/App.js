@@ -15,7 +15,7 @@ const App = () => {
       const url = `http://www.omdbapi.com/?s=${searchValue}&apikey=263d22d8`;
       const response = await axios.get(url);
       console.log(response.data);
-      setMovies(response.data.search);
+      setMovies(response.data.Search);
     };
 
     fetchMovies();
