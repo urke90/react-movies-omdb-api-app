@@ -2,13 +2,16 @@ import React, { useState, useEffect } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
 import axios from "axios";
-import MovieList from "./components/MovieList";
-import MovieListHeading from "./components/MovieListHeading";
+import MovieList from "./components/MovieList/MovieList";
+import MovieListHeading from "./components/MoviesHeader/MovieListHeading";
 import Search from "./components/Search";
+import AddFavourites from "./components/FavouriteMovies/addFavourite";
+import RemoveFavourite from "./components/FavouriteMovies/removeFavourites";
 
 const App = () => {
   const [searchValue, setSearchValue] = useState("");
   const [movies, setMovies] = useState([]);
+  const [favoriteMovies, setFavouriteMovies] = useState([]);
 
   useEffect(() => {
     const fetchMovies = async () => {
@@ -27,7 +30,15 @@ const App = () => {
         <MovieListHeading heading="OMBD Movies!" />
         <Search value={searchValue} setSearchValue={setSearchValue} />
       </div>
-      <div className="row">{movies && <MovieList movies={movies} />}</div>
+      <div className="row">
+        {movies && <MovieList favouriteMoviesHandler movies={movies} />}
+      </div>
+      <MovieListHeading heading="Favourite Movies!" />
+      <div className="row">
+        {favoriteMovies && (
+          <MovieList favouriteMoviesHandler movies={favoriteMovies} />
+        )}
+      </div>
     </div>
   );
 };
