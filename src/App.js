@@ -17,6 +17,12 @@ const App = () => {
     setFavouriteMovies((prevState) => [...prevState, movie]);
   };
 
+  const removeFavouriteMovieHandler = (movie) => {
+    setFavouriteMovies((prevMovies) =>
+      prevMovies.filter((prevMovie) => prevMovie.imdbID !== movie.imdbID)
+    );
+  };
+
   useEffect(() => {
     const fetchMovies = async () => {
       const url = `http://www.omdbapi.com/?s=${searchValue}&apikey=263d22d8`;
@@ -47,6 +53,7 @@ const App = () => {
       <div className="row">
         {favoriteMovies && (
           <MovieList
+            addRemoveFavourites={removeFavouriteMovieHandler}
             favouriteMoviesComp={RemoveFavourite}
             movies={favoriteMovies}
           />

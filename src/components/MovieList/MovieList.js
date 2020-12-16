@@ -3,7 +3,6 @@ import "./MovieList.css";
 
 const MovieList = ({ movies, addRemoveFavourites, favouriteMoviesComp }) => {
   const FavouriteMoviesComp = favouriteMoviesComp;
-  console.log("movies", movies);
   return (
     <>
       {movies.map((movie, index) => (
