@@ -13,6 +13,10 @@ const App = () => {
   const [movies, setMovies] = useState([]);
   const [favoriteMovies, setFavouriteMovies] = useState([]);
 
+  const addFavouriteMovieHandler = (movie) => {
+    setFavouriteMovies((prevState) => [...prevState, movie]);
+  };
+
   useEffect(() => {
     const fetchMovies = async () => {
       const url = `http://www.omdbapi.com/?s=${searchValue}&apikey=263d22d8`;
@@ -31,12 +35,21 @@ const App = () => {
         <Search value={searchValue} setSearchValue={setSearchValue} />
       </div>
       <div className="row">
-        {movies && <MovieList favouriteMoviesHandler movies={movies} />}
+        {movies && (
+          <MovieList
+            addRemoveFavourites={addFavouriteMovieHandler}
+            favouriteMoviesComp={AddFavourites}
+            movies={movies}
+          />
+        )}
       </div>
       <MovieListHeading heading="Favourite Movies!" />
       <div className="row">
         {favoriteMovies && (
-          <MovieList favouriteMoviesHandler movies={favoriteMovies} />
+          <MovieList
+            favouriteMoviesComp={RemoveFavourite}
+            movies={favoriteMovies}
+          />
         )}
       </div>
     </div>
